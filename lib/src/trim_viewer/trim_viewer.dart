@@ -50,19 +50,19 @@ class TrimViewer extends StatefulWidget {
   /// Callback to the audio start position
   ///
   /// Returns the selected audio start position in `milliseconds`.
-  final Function(double startValue)? onChangeStart;
+  final ValueChanged<double>? onChangeStart;
 
   /// Callback to the audio end position.
   ///
   /// Returns the selected audio end position in `milliseconds`.
-  final Function(double endValue)? onChangeEnd;
+  final ValueChanged<double>? onChangeEnd;
 
   /// Callback to the audio playback
   /// state to know whether it is currently playing or paused.
   ///
   /// Returns a `boolean` value. If `true`, audio is currently
   /// playing, otherwise paused.
-  final Function(bool isPlaying)? onChangePlaybackState;
+  final ValueChanged<bool>? onChangePlaybackState;
 
   /// This is the fraction of padding present beside the trimmer editor,
   /// calculated on the `maxAudioLength` value.
@@ -141,25 +141,25 @@ class TrimViewer extends StatefulWidget {
 
   final bool allowAudioSelection;
 
-  const TrimViewer(
-      {Key? key,
-      required this.trimmer,
-      this.maxAudioLength = const Duration(milliseconds: 0),
-      this.viewerWidth = 50 * 8,
-      this.viewerHeight = 50,
-      this.showDuration = true,
-      this.durationTextStyle = const TextStyle(color: Colors.white),
-      this.durationStyle = DurationStyle.FORMAT_HH_MM_SS,
-      this.onChangeStart,
-      this.onChangeEnd,
-      this.onChangePlaybackState,
-      this.paddingFraction = 0.2,
-      this.editorProperties = const TrimEditorProperties(),
-      this.areaProperties = const TrimAreaProperties(),
-      this.backgroundColor,
-      this.allowAudioSelection = true,
-      this.barColor})
-      : super(key: key);
+  const TrimViewer({
+    super.key,
+    required this.trimmer,
+    this.maxAudioLength = const Duration(milliseconds: 0),
+    this.viewerWidth = 50 * 8,
+    this.viewerHeight = 50,
+    this.showDuration = true,
+    this.durationTextStyle = const TextStyle(color: Colors.white),
+    this.durationStyle = DurationStyle.FORMAT_HH_MM_SS,
+    this.onChangeStart,
+    this.onChangeEnd,
+    this.onChangePlaybackState,
+    this.paddingFraction = 0.2,
+    this.editorProperties = const TrimEditorProperties(),
+    this.areaProperties = const TrimAreaProperties(),
+    this.backgroundColor,
+    this.allowAudioSelection = true,
+    this.barColor,
+  });
 
   @override
   State<TrimViewer> createState() => _TrimViewerState();

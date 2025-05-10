@@ -15,16 +15,16 @@ class FixedBarViewer extends StatelessWidget {
 
   /// For showing the bars generated from the audio,
   /// like a frame by frame preview
-  const FixedBarViewer(
-      {Key? key,
-      required this.audioFile,
-      required this.audioDuration,
-      required this.barHeight,
-      required this.barWeight,
-      required this.fit,
-      this.backgroundColor,
-      this.barColor})
-      : super(key: key);
+  const FixedBarViewer({
+    super.key,
+    required this.audioFile,
+    required this.audioDuration,
+    required this.barHeight,
+    required this.barWeight,
+    required this.fit,
+    this.backgroundColor,
+    this.barColor,
+  });
 
   Stream<List<int?>> generateBars() async* {
     List<int> bars = [];

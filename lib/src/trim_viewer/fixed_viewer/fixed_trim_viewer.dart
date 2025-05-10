@@ -47,19 +47,19 @@ class FixedTrimViewer extends StatefulWidget {
   /// Callback to the audio start position
   ///
   /// Returns the selected audio start position in `milliseconds`.
-  final Function(double startValue)? onChangeStart;
+  final ValueChanged<double>? onChangeStart;
 
   /// Callback to the audio end position.
   ///
   /// Returns the selected audio end position in `milliseconds`.
-  final Function(double endValue)? onChangeEnd;
+  final ValueChanged<double>? onChangeEnd;
 
   /// Callback to the audio playback
   /// state to know whether it is currently playing or paused.
   ///
   /// Returns a `boolean` value. If `true`, audio is currently
   /// playing, otherwise paused.
-  final Function(bool isPlaying)? onChangePlaybackState;
+  final ValueChanged<bool>? onChangePlaybackState;
 
   /// Properties for customizing the trim editor.
   final TrimEditorProperties editorProperties;
@@ -119,23 +119,24 @@ class FixedTrimViewer extends StatefulWidget {
 
   final bool allowAudioSelection;
 
-  const FixedTrimViewer(
-      {super.key,
-      required this.trimmer,
-      this.viewerWidth = 50.0 * 8,
-      this.viewerHeight = 50,
-      this.maxAudioLength = const Duration(milliseconds: 0),
-      this.showDuration = true,
-      this.durationTextStyle = const TextStyle(color: Colors.white),
-      this.durationStyle = DurationStyle.FORMAT_HH_MM_SS,
-      this.onChangeStart,
-      this.onChangeEnd,
-      this.onChangePlaybackState,
-      this.editorProperties = const TrimEditorProperties(),
-      this.areaProperties = const FixedTrimAreaProperties(),
-      this.barColor,
-      this.backgroundColor,
-      required this.allowAudioSelection});
+  const FixedTrimViewer({
+    super.key,
+    required this.trimmer,
+    this.viewerWidth = 50.0 * 8,
+    this.viewerHeight = 50,
+    this.maxAudioLength = const Duration(milliseconds: 0),
+    this.showDuration = true,
+    this.durationTextStyle = const TextStyle(color: Colors.white),
+    this.durationStyle = DurationStyle.FORMAT_HH_MM_SS,
+    this.onChangeStart,
+    this.onChangeEnd,
+    this.onChangePlaybackState,
+    this.editorProperties = const TrimEditorProperties(),
+    this.areaProperties = const FixedTrimAreaProperties(),
+    this.barColor,
+    this.backgroundColor,
+    required this.allowAudioSelection,
+  });
 
   @override
   State<FixedTrimViewer> createState() => _FixedTrimViewerState();
@@ -144,6 +145,7 @@ class FixedTrimViewer extends StatefulWidget {
 class _FixedTrimViewerState extends State<FixedTrimViewer>
     with TickerProviderStateMixin {
   final _trimmerAreaKey = GlobalKey();
+
   File? get _audioFile => widget.trimmer.currentAudioFile;
 
   double _audioStartPos = 0.0;

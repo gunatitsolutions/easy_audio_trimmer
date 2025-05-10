@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AudioTrimmerView extends StatefulWidget {
   final File file;
 
-  const AudioTrimmerView(this.file, {Key? key}) : super(key: key);
+  const AudioTrimmerView(this.file, {super.key});
   @override
   State<AudioTrimmerView> createState() => _AudioTrimmerViewState();
 }
