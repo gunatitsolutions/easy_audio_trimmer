@@ -370,14 +370,15 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
   /// [_onDragStart].
   /// Makes sure the limits are respected.
   void _onDragUpdate(DragUpdateDetails details) {
+    debugPrint("_onDragUpdate");
     if (!_allowDrag) return;
 
     if (_dragType == EditorDragType.left) {
       if (!widget.allowAudioSelection) return;
       _startCircleSize = widget.editorProperties.circleSizeOnDrag;
       if ((_startPos.dx + details.delta.dx >= 0) &&
-          (_startPos.dx + details.delta.dx <= _endPos.dx) &&
-          !(_endPos.dx - _startPos.dx - details.delta.dx > maxLengthPixels!)) {
+          (_startPos.dx + details.delta.dx <= _endPos.dx)
+          /* && !(_endPos.dx - _startPos.dx - details.delta.dx > maxLengthPixels!)*/) {
         _startPos += details.delta;
         _onStartDragged();
       }
@@ -395,8 +396,8 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       if (!widget.allowAudioSelection) return;
       _endCircleSize = widget.editorProperties.circleSizeOnDrag;
       if ((_endPos.dx + details.delta.dx <= _barViewerW) &&
-          (_endPos.dx + details.delta.dx >= _startPos.dx) &&
-          !(_endPos.dx - _startPos.dx + details.delta.dx > maxLengthPixels!)) {
+          (_endPos.dx + details.delta.dx >= _startPos.dx)/* &&
+          !(_endPos.dx - _startPos.dx + details.delta.dx > maxLengthPixels!)*/) {
         _endPos += details.delta;
         _onEndDragged();
       }
@@ -405,6 +406,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
   }
 
   void _onStartDragged() {
+    debugPrint("_onStartDragged");
     _startFraction = (_startPos.dx / _barViewerW);
     _audioStartPos = _audioDuration * _startFraction;
     widget.onChangeStart!(_audioStartPos);
@@ -415,6 +417,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
   }
 
   void _onEndDragged() {
+    debugPrint("_onEndDragged");
     _endFraction = _endPos.dx / _barViewerW;
     _audioEndPos = _audioDuration * _endFraction;
     widget.onChangeEnd!(_audioEndPos);
@@ -426,6 +429,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
 
   /// Drag gesture ended, update UI accordingly.
   void _onDragEnd(DragEndDetails details) {
+    debugPrint("_onDragEnd");
     setState(() {
       _startCircleSize = widget.editorProperties.circleSize;
       _endCircleSize = widget.editorProperties.circleSize;
