@@ -327,7 +327,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       // });
 
       audioPlayerController.setVolume(1.0);
-      // _audioDuration = (await audioPlayerController.getDuration())!.inMilliseconds;
+      _audioDuration = (await audioPlayerController.getDuration())!.inMilliseconds;
     }
   }
 
@@ -377,7 +377,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       _startCircleSize = widget.editorProperties.circleSizeOnDrag;
       if ((_startPos.dx + details.delta.dx >= 0) &&
           (_startPos.dx + details.delta.dx <= _endPos.dx)
-          /* && !(_endPos.dx - _startPos.dx - details.delta.dx > maxLengthPixels!)*/) {
+           && !(_endPos.dx - _startPos.dx - details.delta.dx > maxLengthPixels!)) {
         _startPos += details.delta;
         _onStartDragged();
       }
@@ -395,8 +395,8 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       if (!widget.allowAudioSelection) return;
       _endCircleSize = widget.editorProperties.circleSizeOnDrag;
       if ((_endPos.dx + details.delta.dx <= _barViewerW) &&
-          (_endPos.dx + details.delta.dx >= _startPos.dx)/* &&
-          !(_endPos.dx - _startPos.dx + details.delta.dx > maxLengthPixels!)*/) {
+          (_endPos.dx + details.delta.dx >= _startPos.dx) &&
+          !(_endPos.dx - _startPos.dx + details.delta.dx > maxLengthPixels!)) {
         _endPos += details.delta;
         _onEndDragged();
       }
