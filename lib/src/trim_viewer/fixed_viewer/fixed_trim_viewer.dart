@@ -213,7 +213,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       log('numberOfBars: $_numberOfBars');
       log('barViewerW: $_barViewerW');
       Duration? totalDuration = await audioPlayerController.getDuration();
-
+      _audioDuration = (await audioPlayerController.getDuration())!.inMilliseconds;
       setState(() {
         _barViewerW = _numberOfBars * _barViewerH;
 
@@ -327,8 +327,7 @@ class _FixedTrimViewerState extends State<FixedTrimViewer>
       // });
 
       audioPlayerController.setVolume(1.0);
-      _audioDuration =
-          (await audioPlayerController.getDuration())!.inMilliseconds;
+      // _audioDuration = (await audioPlayerController.getDuration())!.inMilliseconds;
     }
   }
 
